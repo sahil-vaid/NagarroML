@@ -1,6 +1,7 @@
 from scipy.io import loadmat
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestRegressor
 
 t = np.linspace(0,5,100)
 
@@ -9,16 +10,16 @@ print(mat.keys())
 nDE = []
 nDE.append(mat['X097_DE_time'])
 print(len(nDE))
-nMainDE = []
-for j in nDE:
-    for k in j:
-        nMainDE.append(k)
+nMainDE = list(nDE)
+##for j in nDE:
+##    for k in j:
+##        nMainDE.append(k)
 print(len(nMainDE))
 
 nFE = []
 nFE.append(mat['X097_FE_time'])
 print(len(nFE))
-nMainFE = []
+nMainFE = list(nFE)
 for j in nFE:
     for k in j:
         nMainFE.append(k)
@@ -30,7 +31,12 @@ print(len(nMainFE))
 mat = loadmat("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\109")
 print(mat.keys())
 irDE10 = []
-irDE10 = list(mat['X109_DE_time'])
+nDE = []
+nDE.append(mat['X109_DE_time'])
+for j in nDE:
+    for k in j:
+        irDE10.append(k)
+
 print(len(irDE10))
 
 irFE10 = []
@@ -42,8 +48,9 @@ plt.plot(t,irDE10[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE10[:100],'y')
 plt.title("NormalDE(RED),IRDE10(Blue),NormalFE(Green),IRFE10(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE10(Blue),NormalFE(Green),IRFE10(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE10(Blue),NormalFE(Green),IRFE10(Yellow)")
+##plt.show()
+plt.close()
 ############################
 
 mat = loadmat("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\122")
@@ -61,8 +68,9 @@ plt.plot(t,bDE10[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE10[:100],'y')
 plt.title("NormalDE(RED),bDE10(Blue),NormalFE(Green),bFE10(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE10(Blue),NormalFE(Green),bFE10(Yellow)")
+##plt.savefig("NormalDE(RED),bDE10(Blue),NormalFE(Green),bFE10(Yellow)")
+##plt.show()
+plt.close()
 
 #################################
 
@@ -82,8 +90,8 @@ plt.plot(t,urDE10[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE10[:100],'y')
 plt.title("NormalDE(RED),urDE10(Blue),NormalFE(Green),urFE10(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE10(Blue),NormalFE(Green),urFE10(Yellow)")
+##plt.savefig("NormalDE(RED),urDE10(Blue),NormalFE(Green),urFE10(Yellow)")
+##plt.show()
 
 ##########################  Grade1 LOAD 1  #####################
  
@@ -103,8 +111,8 @@ plt.plot(t,irDE11[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE11[:100],'y')
 plt.title("NormalDE(RED),IRDE11(Blue),NormalFE(Green),IRFE11(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE11(Blue),NormalFE(Green),IRFE11(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE11(Blue),NormalFE(Green),IRFE11(Yellow)")
+##plt.show()
 
 ############################
 
@@ -123,8 +131,8 @@ plt.plot(t,bDE11[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE11[:100],'y')
 plt.title("NormalDE(RED),bDE11(Blue),NormalFE(Green),bFE11(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE11(Blue),NormalFE(Green),bFE11(Yellow)")
+##plt.savefig("NormalDE(RED),bDE11(Blue),NormalFE(Green),bFE11(Yellow)")
+##plt.show()
 
 
 
@@ -145,8 +153,8 @@ plt.plot(t,urDE11[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE11[:100],'y')
 plt.title("NormalDE(RED),urDE11(Blue),NormalFE(Green),urFE11(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE11(Blue),NormalFE(Green),urFE11(Yellow)")
+##plt.savefig("NormalDE(RED),urDE11(Blue),NormalFE(Green),urFE11(Yellow)")
+##plt.show()
 
 
 ##########################  Grade1 LOAD 2  #####################
@@ -167,8 +175,8 @@ plt.plot(t,irDE12[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE12[:100],'y')
 plt.title("NormalDE(RED),IRDE12(Blue),NormalFE(Green),IRFE12(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE12(Blue),NormalFE(Green),IRFE12(Yellow)")
+##plt.show()
+##plt.savefig("NormalDE(RED),IRDE12(Blue),NormalFE(Green),IRFE12(Yellow)")
 
 
 ############################
@@ -188,8 +196,9 @@ plt.plot(t,bDE12[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE12[:100],'y')
 plt.title("NormalDE(RED),bDE12(Blue),NormalFE(Green),bFE12(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE12(Blue),NormalFE(Green),bFE12(Yellow)")
+##plt.savefig("NormalDE(RED),bDE12(Blue),NormalFE(Green),bFE12(Yellow)")
+##plt.show()
+
 
 
 
@@ -210,8 +219,8 @@ plt.plot(t,urDE12[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE12[:100],'y')
 plt.title("NormalDE(RED),urDE12(Blue),NormalFE(Green),urFE12(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE12(Blue),NormalFE(Green),urFE12(Yellow)")
+##plt.savefig("NormalDE(RED),urDE12(Blue),NormalFE(Green),urFE12(Yellow)")
+##plt.show()
 
 
 ##########################  Grade1 LOAD 3  #####################
@@ -258,8 +267,8 @@ plt.plot(t,irDE13[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE13[:100],'y')
 plt.title("NormalDE(RED),IRDE13(Blue),NormalFE(Green),IRFE13(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE13(Blue),NormalFE(Green),IRFE13(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE13(Blue),NormalFE(Green),IRFE13(Yellow)")
+##plt.show()
 
 
 plt.plot(t,nMainDE[:100],'r')
@@ -267,16 +276,16 @@ plt.plot(t,bDE13[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE13[:100],'y')
 plt.title("NormalDE(RED),bDE13(Blue),NormalFE(Green),bFE13(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE13(Blue),NormalFE(Green),bFE13(Yellow)")
+##plt.savefig("NormalDE(RED),bDE13(Blue),NormalFE(Green),bFE13(Yellow)")
+##plt.show()
 
 plt.plot(t,nMainDE[:100],'r')
 plt.plot(t,urDE13[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE13[:100],'y')
 plt.title("NormalDE(RED),urDE13(Blue),NormalFE(Green),urFE13(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE13(Blue),NormalFE(Green),urFE13(Yellow)")
+##plt.savefig("NormalDE(RED),urDE13(Blue),NormalFE(Green),urFE13(Yellow)")
+##plt.show()
 
 
 
@@ -325,8 +334,8 @@ plt.plot(t,irDE20[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE20[:100],'y')
 plt.title("NormalDE(RED),IRDE20(Blue),NormalFE(Green),IRFE20(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE20(Blue),NormalFE(Green),IRFE20(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE20(Blue),NormalFE(Green),IRFE20(Yellow)")
+##plt.show()
 
 
 plt.plot(t,nMainDE[:100],'r')
@@ -334,16 +343,16 @@ plt.plot(t,bDE20[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE20[:100],'y')
 plt.title("NormalDE(RED),bDE20(Blue),NormalFE(Green),bFE20(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE20(Blue),NormalFE(Green),bFE20(Yellow)")
+##plt.savefig("NormalDE(RED),bDE20(Blue),NormalFE(Green),bFE20(Yellow)")
+##plt.show()
 
 plt.plot(t,nMainDE[:100],'r')
 plt.plot(t,urDE20[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE20[:100],'y')
 plt.title("NormalDE(RED),urDE20(Blue),NormalFE(Green),urFE20(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE20(Blue),NormalFE(Green),urFE20(Yellow)")
+##plt.savefig("NormalDE(RED),urDE20(Blue),NormalFE(Green),urFE20(Yellow)")
+##plt.show()
 
 
 ##########################  Grade2 LOAD 1  #####################
@@ -389,8 +398,8 @@ plt.plot(t,irDE21[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE21[:100],'y')
 plt.title("NormalDE(RED),IRDE21(Blue),NormalFE(Green),IRFE21(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE21(Blue),NormalFE(Green),IRFE21(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE21(Blue),NormalFE(Green),IRFE21(Yellow)")
+##plt.show()
 
 
 plt.plot(t,nMainDE[:100],'r')
@@ -398,16 +407,16 @@ plt.plot(t,bDE21[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE21[:100],'y')
 plt.title("NormalDE(RED),bDE21(Blue),NormalFE(Green),bFE21(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE21(Blue),NormalFE(Green),bFE21(Yellow)")
+##plt.savefig("NormalDE(RED),bDE21(Blue),NormalFE(Green),bFE21(Yellow)")
+##plt.show()
 
 plt.plot(t,nMainDE[:100],'r')
 plt.plot(t,urDE21[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE21[:100],'y')
 plt.title("NormalDE(RED),urDE21(Blue),NormalFE(Green),urFE21(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE21(Blue),NormalFE(Green),urFE21(Yellow)")
+##plt.savefig("NormalDE(RED),urDE21(Blue),NormalFE(Green),urFE21(Yellow)")
+##plt.show()
 
 
 
@@ -456,8 +465,8 @@ plt.plot(t,irDE22[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE22[:100],'y')
 plt.title("NormalDE(RED),IRDE22(Blue),NormalFE(Green),IRFE22(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE22(Blue),NormalFE(Green),IRFE22(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE22(Blue),NormalFE(Green),IRFE22(Yellow)")
+##plt.show()
 
 
 plt.plot(t,nMainDE[:100],'r')
@@ -465,16 +474,16 @@ plt.plot(t,bDE22[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE22[:100],'y')
 plt.title("NormalDE(RED),bDE22(Blue),NormalFE(Green),bFE22(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE22(Blue),NormalFE(Green),bFE22(Yellow)")
+##plt.savefig("NormalDE(RED),bDE22(Blue),NormalFE(Green),bFE22(Yellow)")
+##plt.show()
 
 plt.plot(t,nMainDE[:100],'r')
 plt.plot(t,urDE22[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE22[:100],'y')
 plt.title("NormalDE(RED),urDE22(Blue),NormalFE(Green),urFE22(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE22(Blue),NormalFE(Green),urFE22(Yellow)")
+##plt.savefig("NormalDE(RED),urDE22(Blue),NormalFE(Green),urFE22(Yellow)")
+##plt.show()
 
 
 
@@ -524,8 +533,8 @@ plt.plot(t,irDE23[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE23[:100],'y')
 plt.title("NormalDE(RED),IRDE23(Blue),NormalFE(Green),IRFE23(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE23(Blue),NormalFE(Green),IRFE23(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE23(Blue),NormalFE(Green),IRFE23(Yellow)")
+##plt.show()
 
 
 
@@ -534,16 +543,16 @@ plt.plot(t,bDE23[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE23[:100],'y')
 plt.title("NormalDE(RED),bDE23(Blue),NormalFE(Green),bFE23(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE23(Blue),NormalFE(Green),bFE23(Yellow)")
+##plt.savefig("NormalDE(RED),bDE23(Blue),NormalFE(Green),bFE23(Yellow)")
+##plt.show()
 
 plt.plot(t,nMainDE[:100],'r')
 plt.plot(t,urDE23[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE23[:100],'y')
 plt.title("NormalDE(RED),urDE23(Blue),NormalFE(Green),urFE23(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE22(Blue),NormalFE(Green),urFE22(Yellow)")
+##plt.savefig("NormalDE(RED),urDE22(Blue),NormalFE(Green),urFE22(Yellow)")
+##plt.show()
 
 
 
@@ -593,8 +602,8 @@ plt.plot(t,irDE30[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE30[:100],'y')
 plt.title("NormalDE(RED),IRDE30(Blue),NormalFE(Green),IRFE30(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE30(Blue),NormalFE(Green),IRFE30(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE30(Blue),NormalFE(Green),IRFE30(Yellow)")
+##plt.show()
 
 
 
@@ -603,16 +612,16 @@ plt.plot(t,bDE30[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE30[:100],'y')
 plt.title("NormalDE(RED),bDE30(Blue),NormalFE(Green),bFE30(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE30(Blue),NormalFE(Green),bFE30(Yellow)")
+##plt.savefig("NormalDE(RED),bDE30(Blue),NormalFE(Green),bFE30(Yellow)")
+##plt.show()
 
 plt.plot(t,nMainDE[:100],'r')
 plt.plot(t,urDE30[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE30[:100],'y')
 plt.title("NormalDE(RED),urDE30(Blue),NormalFE(Green),urFE30(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE30(Blue),NormalFE(Green),urFE30(Yellow)")
+##plt.savefig("NormalDE(RED),urDE30(Blue),NormalFE(Green),urFE30(Yellow)")
+##plt.show()
 
 
 
@@ -739,8 +748,8 @@ plt.plot(t,irDE31[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE31[:100],'y')
 plt.title("NormalDE(RED),IRDE31(Blue),NormalFE(Green),IRFE31(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE31(Blue),NormalFE(Green),IRFE31(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE31(Blue),NormalFE(Green),IRFE31(Yellow)")
+##plt.show()
 
 
 
@@ -749,16 +758,16 @@ plt.plot(t,bDE31[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE31[:100],'y')
 plt.title("NormalDE(RED),bDE31(Blue),NormalFE(Green),bFE31(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE31(Blue),NormalFE(Green),bFE31(Yellow)")
+##plt.savefig("NormalDE(RED),bDE31(Blue),NormalFE(Green),bFE31(Yellow)")
+##plt.show()
 
 plt.plot(t,nMainDE[:100],'r')
 plt.plot(t,urDE31[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE31[:100],'y')
 plt.title("NormalDE(RED),urDE31(Blue),NormalFE(Green),urFE31(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE31(Blue),NormalFE(Green),urFE31(Yellow)")
+##plt.savefig("NormalDE(RED),urDE31(Blue),NormalFE(Green),urFE31(Yellow)")
+##plt.show()
 
 
 plt.plot(t,nMainDE[:100],'r')
@@ -766,8 +775,8 @@ plt.plot(t,irDE32[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE32[:100],'y')
 plt.title("NormalDE(RED),IRDE32(Blue),NormalFE(Green),IRFE32(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE32(Blue),NormalFE(Green),IRFE32(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE32(Blue),NormalFE(Green),IRFE32(Yellow)")
+##plt.show()
 
 
 plt.plot(t,nMainDE[:100],'r')
@@ -775,17 +784,16 @@ plt.plot(t,bDE32[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE32[:100],'y')
 plt.title("NormalDE(RED),bDE32(Blue),NormalFE(Green),bFE32(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE32(Blue),NormalFE(Green),bFE32(Yellow)")
+##plt.savefig("NormalDE(RED),bDE32(Blue),NormalFE(Green),bFE32(Yellow)")
+##plt.show()
 
 plt.plot(t,nMainDE[:100],'r')
 plt.plot(t,urDE32[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE32[:100],'y')
 plt.title("NormalDE(RED),urDE32(Blue),NormalFE(Green),urFE32(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE32(Blue),NormalFE(Green),urFE32(Yellow)")
-
+##plt.savefig("NormalDE(RED),urDE32(Blue),NormalFE(Green),urFE32(Yellow)")
+##plt.show()
 
 
 plt.plot(t,nMainDE[:100],'r')
@@ -793,8 +801,8 @@ plt.plot(t,irDE33[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,irFE33[:100],'y')
 plt.title("NormalDE(RED),IRDE33(Blue),NormalFE(Green),IRFE33(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),IRDE33(Blue),NormalFE(Green),IRFE33(Yellow)")
+##plt.savefig("NormalDE(RED),IRDE33(Blue),NormalFE(Green),IRFE33(Yellow)")
+##plt.show()
 
 
 plt.plot(t,nMainDE[:100],'r')
@@ -802,16 +810,63 @@ plt.plot(t,bDE33[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,bFE33[:100],'y')
 plt.title("NormalDE(RED),bDE33(Blue),NormalFE(Green),bFE33(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),bDE33(Blue),NormalFE(Green),bFE33(Yellow)")
+##plt.savefig("NormalDE(RED),bDE33(Blue),NormalFE(Green),bFE33(Yellow)")
+##plt.show()
 
 plt.plot(t,nMainDE[:100],'r')
 plt.plot(t,urDE33[:100],'b')
 plt.plot(t,nMainFE[:100],'g')
 plt.plot(t,urFE33[:100],'y')
 plt.title("NormalDE(RED),urDE33(Blue),NormalFE(Green),urFE33(Yellow)")
-plt.show()
-plt.savefig("NormalDE(RED),urDE33(Blue),NormalFE(Green),urFE33(Yellow)")
+##plt.savefig("NormalDE(RED),urDE33(Blue),NormalFE(Green),urFE33(Yellow)")
+##plt.show()
+
+
+nMainDETrain = nMainDE[ :(len(nMainDE)//3) ]
+nMainDETest = nMainDE[ (len(nMainDE)//3)+1 : ]
+nMainFETrain = nMainFE[ : len(nMainFE)//3 ]
+nMAinFETest = nMainFE[ (len(nMainFE)//3)+1 : ]
+
+
+irFE10Train = irFE10[ : (len(irFE10)//3)]
+irFE10Test = irFE10[  (len(irFE10)//3)+1 :  ]
+
+irDE10Train = irDE10[ : (len(irDE10)//3)]
+irDE10Test = irDE10[  (len(irDE10)//3)+1 :  ]
+
+##################### Train  IR DE ################################
+
+Xtrain = []
+Xtrain.append(nMainDETrain)
+Xtrain.append(irDE10Train)
+
+Ytrain = []
+for i in nMainDETrain:
+    Ytrain.append(0)
+for i in irDE10Train:
+    Ytrain.append(1)
+
+Xtest = []
+Xtest.append(nMainDETest)
+Xtest.append(irDE10Test)
+
+Ytest =[]
+for i in nMainDETest:
+    Ytest.append(0)
+for i in irDE10Test:
+    Ytest.append(1)
+
+print(np.shape(Xtrain))
+print(np.shape(Ytrain))
+rf = RandomForestRegressor()
+rf.fit(Xtrain,Ytrain)
+predictions = rf.predict(Xtest)
+errors = abs(predictions - Ytest)
+print('Mean Absolute Error:', round(np.mean(errors), 2))
+mape = 100 * (errors / Ytest)
+# Calculate and display accuracy
+accuracy = 100 - np.mean(mape)
+print('Accuracy:', round(accuracy, 2), '%.')
 
 
 
