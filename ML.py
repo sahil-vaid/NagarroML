@@ -2,27 +2,33 @@ from scipy.io import loadmat
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import accuracy_score
 
 t = np.linspace(0,5,100)
 
 mat = loadmat("C:\\Users\\sahilvaid\\Desktop\\Data\\Normal\\97")
 print(mat.keys())
 nDE = []
-nDE.append(mat['X097_DE_time'])
-print(len(nDE))
-nMainDE = list(nDE)
-##for j in nDE:
-##    for k in j:
-##        nMainDE.append(k)
+##nDE.append()
+##print(len(nDE))
+
+nDE = list(mat['X097_DE_time'])
+##nMainDe = np.reshape(1,243938)
+print(np.shape(nDE))
+nMainDE = []
+for j in nDE:
+    for k in j:
+        nMainDE.append(k)
 print(len(nMainDE))
 
-nFE = []
-nFE.append(mat['X097_FE_time'])
-print(len(nFE))
-nMainFE = list(nFE)
-for j in nFE:
-    for k in j:
-        nMainFE.append(k)
+##nFE = []
+##nFE.append()
+##print(len(nFE))
+nMainFE = list(mat['X097_FE_time'])
+##for j in nFE:
+##    for k in j:
+##        nMainFE.append(k)
 print(len(nMainFE))
 
 ##########################  Grade1 LOAD 0  #####################
@@ -32,10 +38,8 @@ mat = loadmat("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\
 print(mat.keys())
 irDE10 = []
 nDE = []
-nDE.append(mat['X109_DE_time'])
-for j in nDE:
-    for k in j:
-        irDE10.append(k)
+irDE10= list(mat['X109_DE_time'])
+
 
 print(len(irDE10))
 
@@ -825,7 +829,7 @@ plt.title("NormalDE(RED),urDE33(Blue),NormalFE(Green),urFE33(Yellow)")
 nMainDETrain = nMainDE[ :(len(nMainDE)//3) ]
 nMainDETest = nMainDE[ (len(nMainDE)//3)+1 : ]
 nMainFETrain = nMainFE[ : len(nMainFE)//3 ]
-nMAinFETest = nMainFE[ (len(nMainFE)//3)+1 : ]
+nMainFETest = nMainFE[ (len(nMainFE)//3)+1 : ]
 
 
 irFE10Train = irFE10[ : (len(irFE10)//3)]
@@ -837,18 +841,31 @@ irDE10Test = irDE10[  (len(irDE10)//3)+1 :  ]
 ##################### Train  IR DE ################################
 
 Xtrain = []
-Xtrain.append(nMainDETrain)
-Xtrain.append(irDE10Train)
+for j in nMainDETrain:
+    Xtrain.append(j)
+for j in irDE10Train:
+    Xtrain.append(j)
+##Xtrain.append(irDE10Train)
+print(np.shape(nMainDETrain))
+print(np.shape(irDE10Train))
+print(len(Xtrain))
+Xtrain = np.asarray(Xtrain).reshape(-1,1)
 
 Ytrain = []
 for i in nMainDETrain:
     Ytrain.append(0)
 for i in irDE10Train:
     Ytrain.append(1)
+print(len(Ytrain))
+##Ytrain = np.asarray(Ytrain).reshape(-1,1)
 
 Xtest = []
-Xtest.append(nMainDETest)
-Xtest.append(irDE10Test)
+for j in nMainDETest:
+    Xtest.append(j)
+for j in irDE10Test:
+    Xtest.append(j)
+Xtest = np.asarray(Xtest).reshape(-1,1)
+
 
 Ytest =[]
 for i in nMainDETest:
@@ -856,17 +873,69 @@ for i in nMainDETest:
 for i in irDE10Test:
     Ytest.append(1)
 
-print(np.shape(Xtrain))
-print(np.shape(Ytrain))
+print('''DE PREDICTION ONLY''')
 rf = RandomForestRegressor()
 rf.fit(Xtrain,Ytrain)
 predictions = rf.predict(Xtest)
 errors = abs(predictions - Ytest)
 print('Mean Absolute Error:', round(np.mean(errors), 2))
-mape = 100 * (errors / Ytest)
-# Calculate and display accuracy
-accuracy = 100 - np.mean(mape)
-print('Accuracy:', round(accuracy, 2), '%.')
+accuracy = accuracy_score(predictions.round(),Ytest)
+print("RandomForest DE only ", accuracy)
+
+LR = LinearRegression().fit(Xtrain,Ytrain)
+predictions=LR.predict(Xtest)
+accuracy = accuracy_score(predictions.round(),Ytest)
+print("LinearRegression DE only ", accuracy)
+
+##################### Train  IR FE ################################
+
+Xtrain = []
+for j in nMainFETrain:
+    Xtrain.append(j)
+for j in irFE10Train:
+    Xtrain.append(j)
+##Xtrain.append(irDE10Train)
+print(np.shape(nMainFETrain))
+print(np.shape(irFE10Train))
+print(len(Xtrain))
+Xtrain = np.asarray(Xtrain).reshape(-1,1)
+
+Ytrain = []
+for i in nMainFETrain:
+    Ytrain.append(0)
+for i in irFE10Train:
+    Ytrain.append(1)
+print(len(Ytrain))
+##Ytrain = np.asarray(Ytrain).reshape(-1,1)
+
+Xtest = []
+for j in nMainFETest:
+    Xtest.append(j)
+for j in irFE10Test:
+    Xtest.append(j)
+Xtest = np.asarray(Xtest).reshape(-1,1)
+
+
+Ytest =[]
+for i in nMainFETest:
+    Ytest.append(0)
+for i in irFE10Test:
+    Ytest.append(1)
+
+print('''FE PREDICTION ONLY''')
+
+rf = RandomForestRegressor()
+rf.fit(Xtrain,Ytrain)
+predictions = rf.predict(Xtest)
+errors = abs(predictions - Ytest)
+print('Mean Absolute Error:', round(np.mean(errors), 2))
+accuracy = accuracy_score(predictions.round(),Ytest)
+print("RandomForest FE only ", accuracy)
+
+LR = LinearRegression().fit(Xtrain,Ytrain)
+predictions=LR.predict(Xtest)
+accuracy = accuracy_score(predictions.round(),Ytest)
+print("LinearRegression FE only ", accuracy)
 
 
 
