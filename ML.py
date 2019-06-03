@@ -825,6 +825,620 @@ plt.title("NormalDE(RED),urDE33(Blue),NormalFE(Green),urFE33(Yellow)")
 ##plt.savefig("NormalDE(RED),urDE33(Blue),NormalFE(Green),urFE33(Yellow)")
 ##plt.show()
 
+''' FOR PLOTS 25 SUM  '''
+
+newMainDE = []
+count = 0
+while(count + 30 < len(nMainDE)):
+	newMainDE.append(sum(nMainDE[count:(count+30)]))
+	count += 30
+print("forplots ", len(newMainDE))
+
+newIrDe10 = []
+
+count = 0
+while(count + 30 < len(irDE10)):
+	newIrDe10.append(sum(irDE10[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe10))
+
+newIrDe11 = []
+
+count = 0
+while(count + 30 < len(irDE11)):
+	newIrDe11.append(sum(irDE11[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe11))
+
+newIrDe12 = []
+
+count = 0
+while(count + 30 < len(irDE12)):
+	newIrDe12.append(sum(irDE12[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe12))
+
+newIrDe13 = []
+
+count = 0
+while(count + 30 < len(irDE13)):
+	newIrDe13.append(sum(irDE13[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe13))
+
+newIrDe20 = []
+
+count = 0
+while(count + 30 < len(irDE20)):
+	newIrDe20.append(sum(irDE20[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe20))
+
+newIrDe21 = []
+
+count = 0
+while(count + 30 < len(irDE21)):
+	newIrDe21.append(sum(irDE21[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe21))
+
+newIrDe22 = []
+
+count = 0
+while(count + 30 < len(irDE22)):
+	newIrDe22.append(sum(irDE22[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe22))
+
+newIrDe23 = []
+
+count = 0
+while(count + 30 < len(irDE23)):
+	newIrDe23.append(sum(irDE23[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe23))
+
+newIrDe30 = []
+
+count = 0
+while(count + 30 < len(irDE30)):
+	newIrDe30.append(sum(irDE30[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe30))
+
+newIrDe31 = []
+
+count = 0
+while(count + 30 < len(irDE31)):
+	newIrDe31.append(sum(irDE31[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe31))
+
+newIrDe32 = []
+
+count = 0
+while(count + 30 < len(irDE32)):
+	newIrDe32.append(sum(irDE32[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe32))
+
+newIrDe33 = []
+
+count = 0
+while(count + 30 < len(irDE33)):
+	newIrDe33.append(sum(irDE33[count:(count+30)]))
+	count += 30
+print("forplots ",len(newIrDe33))
+
+
+
+newurDe10 = []
+
+count = 0
+while(count + 30 < len(urDE10)):
+	newurDe10.append(sum(urDE10[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe10))
+
+newurDe11 = []
+
+count = 0
+while(count + 30 < len(urDE11)):
+	newurDe11.append(sum(urDE11[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe11))
+
+newurDe12 = []
+
+count = 0
+while(count + 30 < len(urDE12)):
+	newurDe12.append(sum(urDE12[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe12))
+
+newurDe13 = []
+
+count = 0
+while(count + 30 < len(urDE13)):
+	newurDe13.append(sum(urDE13[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe13))
+
+newurDe20 = []
+
+count = 0
+while(count + 30 < len(urDE20)):
+	newurDe20.append(sum(urDE20[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe20))
+
+newurDe21 = []
+
+count = 0
+while(count + 30 < len(urDE21)):
+	newurDe21.append(sum(urDE21[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe21))
+
+newurDe22 = []
+
+count = 0
+while(count + 30 < len(urDE22)):
+	newurDe22.append(sum(urDE22[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe22))
+
+newurDe23 = []
+
+count = 0
+while(count + 30 < len(urDE23)):
+	newurDe23.append(sum(urDE23[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe23))
+
+newurDe30 = []
+
+count = 0
+while(count + 30 < len(urDE30)):
+	newurDe30.append(sum(urDE30[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe30))
+
+newurDe31 = []
+
+count = 0
+while(count + 30 < len(urDE31)):
+	newurDe31.append(sum(urDE31[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe31))
+
+newurDe32 = []
+
+count = 0
+while(count + 30 < len(urDE32)):
+	newurDe32.append(sum(urDE32[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe32))
+
+newurDe33 = []
+
+count = 0
+while(count + 30 < len(urDE33)):
+	newurDe33.append(sum(urDE33[count:(count+30)]))
+	count += 30
+print("forplots ",len(newurDe33))
+
+
+
+newbDe10 = []
+
+count = 0
+while(count + 30 < len(bDE10)):
+	newbDe10.append(sum(bDE10[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe10))
+
+newbDe11 = []
+
+count = 0
+while(count + 30 < len(bDE11)):
+	newbDe11.append(sum(bDE11[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe11))
+
+newbDe12 = []
+
+count = 0
+while(count + 30 < len(bDE12)):
+	newbDe12.append(sum(bDE12[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe12))
+
+newbDe13 = []
+
+count = 0
+while(count + 30 < len(bDE13)):
+	newbDe13.append(sum(bDE13[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe13))
+
+newbDe20 = []
+
+count = 0
+while(count + 30 < len(bDE20)):
+	newbDe20.append(sum(bDE20[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe20))
+
+newbDe21 = []
+
+count = 0
+while(count + 30 < len(bDE21)):
+	newbDe21.append(sum(bDE21[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe21))
+
+newbDe22 = []
+
+count = 0
+while(count + 30 < len(bDE22)):
+	newbDe22.append(sum(bDE22[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe22))
+
+newbDe23 = []
+
+count = 0
+while(count + 30 < len(bDE23)):
+	newbDe23.append(sum(bDE23[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe23))
+
+newbDe30 = []
+
+count = 0
+while(count + 30 < len(bDE30)):
+	newbDe30.append(sum(bDE30[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe30))
+
+newbDe31 = []
+
+count = 0
+while(count + 30 < len(bDE31)):
+	newbDe31.append(sum(bDE31[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe31))
+
+newbDe32 = []
+
+count = 0
+while(count + 30 < len(bDE32)):
+	newbDe32.append(sum(bDE32[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe32))
+
+newbDe33 = []
+
+count = 0
+while(count + 30 < len(bDE33)):
+	newbDe33.append(sum(bDE33[count:(count+30)]))
+	count += 30
+print("forplots ",len(newbDe33))
+
+t = np.linspace(0,1,100)
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe10[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR10")
+plt.savefig("SumDENormal vs SumDeIR10")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe11[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR11")
+plt.savefig("SumDENormal vs SumDeIR11")
+plt.show()
+
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe12[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR12")
+plt.savefig("SumDENormal vs SumDeIR12")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe13[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR13")
+plt.savefig("SumDENormal vs SumDeIR13")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe20[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR20")
+plt.savefig("SumDENormal vs SumDeIR20")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe21[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR21")
+plt.savefig("SumDENormal vs SumDeIR21")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe22[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR22")
+plt.savefig("SumDENormal vs SumDeIR22")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe23[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR23")
+plt.savefig("SumDENormal vs SumDeIR23")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe30[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR30")
+plt.savefig("SumDENormal vs SumDeIR30")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe31[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR31")
+plt.savefig("SumDENormal vs SumDeIR31")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe32[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR32")
+plt.savefig("SumDENormal vs SumDeIR32")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newIrDe33[:100],'b')
+
+plt.title("SumDENormal vs SumDeIR33")
+plt.savefig("SumDENormal vs SumDeIR33")
+plt.show()
+
+
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe10[:100],'b')
+
+plt.title("SumDENormal vs SumDeur10")
+plt.savefig("SumDENormal vs SumDeuR10")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe11[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR11")
+plt.savefig("SumDENormal vs SumDeuR11")
+plt.show()
+
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe12[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR12")
+plt.savefig("SumDENormal vs SumDeuR12")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe13[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR13")
+plt.savefig("SumDENormal vs SumDeuR13")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe20[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR20")
+plt.savefig("SumDENormal vs SumDeuR20")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe21[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR21")
+plt.savefig("SumDENormal vs SumDeuR21")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe22[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR22")
+plt.savefig("SumDENormal vs SumDeuR22")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe23[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR23")
+plt.savefig("SumDENormal vs SumDeuR23")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe30[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR30")
+plt.savefig("SumDENormal vs SumDeuR30")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe31[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR31")
+plt.savefig("SumDENormal vs SumDeuR31")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe32[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR32")
+plt.savefig("SumDENormal vs SumDeuR32")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newurDe33[:100],'b')
+
+plt.title("SumDENormal vs SumDeuR33")
+plt.savefig("SumDENormal vs SumDeuR33")
+plt.show()
+
+
+
+
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe10[:100],'b')
+
+plt.title("SumDENormal vs SumDeb10")
+plt.savefig("SumDENormal vs SumDeb10")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe11[:100],'b')
+
+plt.title("SumDENormal vs SumDeb11")
+plt.savefig("SumDENormal vs SumDeb11")
+plt.show()
+
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe12[:100],'b')
+
+plt.title("SumDENormal vs SumDeb12")
+plt.savefig("SumDENormal vs SumDeb12")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe13[:100],'b')
+
+plt.title("SumDENormal vs SumDeb13")
+plt.savefig("SumDENormal vs SumDeb13")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe20[:100],'b')
+
+plt.title("SumDENormal vs SumDeb20")
+plt.savefig("SumDENormal vs SumDeb20")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe21[:100],'b')
+
+plt.title("SumDENormal vs SumDeb21")
+plt.savefig("SumDENormal vs SumDeb21")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe22[:100],'b')
+
+plt.title("SumDENormal vs SumDeb22")
+plt.savefig("SumDENormal vs SumDeb22")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe23[:100],'b')
+
+plt.title("SumDENormal vs SumDeb23")
+plt.savefig("SumDENormal vs SumDeb23")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe30[:100],'b')
+
+plt.title("SumDENormal vs SumDeb30")
+plt.savefig("SumDENormal vs SumDeb30")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe31[:100],'b')
+
+plt.title("SumDENormal vs SumDeb31")
+plt.savefig("SumDENormal vs SumDeb31")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe32[:100],'b')
+
+plt.title("SumDENormal vs SumDeb32")
+plt.savefig("SumDENormal vs SumDeb32")
+plt.show()
+
+
+plt.plot(t,newMainDE[:100],'r')
+plt.plot(t,newbDe33[:100],'b')
+
+plt.title("SumDENormal vs SumDeb33")
+plt.savefig("SumDENormal vs SumDeb33")
+plt.show()
+
+
+
+
+
+
+
+
+
+'''''''''''''''''''''END PLOTS'''''''''''''''''''''''''''''''''''''''
+
+
+
+
+
+
 
 nMainDETrain = nMainDE[ :(len(nMainDE)//3) ]
 nMainDETest = nMainDE[ (len(nMainDE)//3)+1 : ]
