@@ -5,98 +5,67 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import accuracy_score
 from sklearn import svm
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+import sklearn.metrics as metrics
+import matplotlib.pyplot as plt
+import scikitplot as skplt
+import seaborn as sn
+import pandas as pd
 
-t = np.linspace(0,5,100)
 
+
+
+
+
+t = np.linspace(0,10,80)
 mat = loadmat("C:\\Users\\sahilvaid\\Desktop\\Data\\Normal\\97")
-#print(mat.keys())
 nDE = []
-##nDE.append()
-###print(len(nDE))
-
 nDE = list(mat['X097_DE_time'])
-##nMainDe = np.reshape(1,243938)
-#print(np.shape(nDE))
 nMainDE = []
 for j in nDE:
     for k in j:
         nMainDE.append(k)
-#print(len(nMainDE))
-
 nFE = list(mat['X097_FE_time'])
-# nFE.append()
-#print(len(nFE))
 nMainFE = []
 for j in nFE:
    for k in j:
        nMainFE.append(k)
-#print(len(nMainFE))
+
+
+
+def loadData(path, key):
+	mat = loadmat(path)
+	nDE = []
+	list1 = []
+	list1= list(mat[key])
+	return list1
+
+def plotMe(list1,list2):
+	plt.plot(t,nMainDE[720:800],'r',label = 'Normal DE')
+	plt.plot(t,list1[720:800],'b',label = 'Faulty DE')
+	plt.plot(t,nMainFE[720:800],'g',label = 'Normal FE')
+	plt.plot(t,list2[720:800],'y',label = 'Faulty FE')
+	plt.title("Data Representation")
+	plt.legend(loc = 'lower right')
+	# plt.savefig("NormalDE(RED),IRDE10(Blue),NormalFE(Green),IRFE10(Yellow)")
+	plt.show()
+	plt.clf()
+	plt.close()
+
+
 
 ##########################  Grade1 LOAD 0  #####################
- 
 
-mat = loadmat("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\109")
-#print(mat.keys())
-irDE10 = []
-nDE = []
-irDE10= list(mat['X109_DE_time'])
-
-
-#print(len(irDE10))
-
-irFE10 = []
-irFE10 = list(mat['X109_FE_time'])
-#print(len(irFE10))
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE10[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE10[:100],'y')
-plt.title("NormalDE(RED),IRDE10(Blue),NormalFE(Green),IRFE10(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE10(Blue),NormalFE(Green),IRFE10(Yellow)")
-##plt.show()
-plt.close()
-############################
-
-mat = loadmat("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\122")
-#print(mat.keys())
-bDE10 = []
-bDE10 = list(mat['X122_DE_time'])
-#print(len(bDE10))
-
-bFE10 = []
-bFE10 = list(mat['X122_FE_time'])
-#print(len(bFE10))
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE10[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE10[:100],'y')
-plt.title("NormalDE(RED),bDE10(Blue),NormalFE(Green),bFE10(Yellow)")
-##plt.savefig("NormalDE(RED),bDE10(Blue),NormalFE(Green),bFE10(Yellow)")
-##plt.show()
-plt.close()
-
-#################################
-
-mat = loadmat("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\135")
-#print(mat.keys())
-urDE10 = []
-urDE10 = list(mat['X135_DE_time'])
-#print(len(urDE10))
-
-urFE10 = []
-urFE10 = list(mat['X135_FE_time'])
-#print(len(urFE10))
+irDE10 = loadData("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\109", 'X109_DE_time')
+irFE10 = loadData("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\109", 'X109_FE_time')
+bDE10 = loadData("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\122",'X122_DE_time')
+bFE10 = loadData("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\122",'X122_FE_time')
+urDE10 = loadData("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\135",'X135_DE_time')
+urFE10 = loadData("C:\\Users\\sahilvaid\\Desktop\\Data\\Faulty\\48k\\grade1\\load0\\135",'X135_FE_time')
 
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE10[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE10[:100],'y')
-plt.title("NormalDE(RED),urDE10(Blue),NormalFE(Green),urFE10(Yellow)")
-##plt.savefig("NormalDE(RED),urDE10(Blue),NormalFE(Green),urFE10(Yellow)")
-##plt.show()
 
 ##########################  Grade1 LOAD 1  #####################
  
@@ -111,13 +80,7 @@ irFE11 = []
 irFE11 = list(mat['X110_FE_time'])
 #print(len(irFE11))
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE11[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE11[:100],'y')
-plt.title("NormalDE(RED),IRDE11(Blue),NormalFE(Green),IRFE11(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE11(Blue),NormalFE(Green),IRFE11(Yellow)")
-##plt.show()
+
 
 ############################
 
@@ -130,14 +93,6 @@ bDE11 = list(mat['X123_DE_time'])
 bFE11 = []
 bFE11 = list(mat['X123_FE_time'])
 #print(len(bFE11))
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE11[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE11[:100],'y')
-plt.title("NormalDE(RED),bDE11(Blue),NormalFE(Green),bFE11(Yellow)")
-##plt.savefig("NormalDE(RED),bDE11(Blue),NormalFE(Green),bFE11(Yellow)")
-##plt.show()
 
 
 
@@ -153,13 +108,6 @@ urFE11 = []
 urFE11 = list(mat['X136_FE_time'])
 #print(len(urFE11))
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE11[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE11[:100],'y')
-plt.title("NormalDE(RED),urDE11(Blue),NormalFE(Green),urFE11(Yellow)")
-##plt.savefig("NormalDE(RED),urDE11(Blue),NormalFE(Green),urFE11(Yellow)")
-##plt.show()
 
 
 ##########################  Grade1 LOAD 2  #####################
@@ -175,11 +123,6 @@ irFE12 = []
 irFE12 = list(mat['X111_FE_time'])
 #print(len(irFE12))
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE12[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE12[:100],'y')
-plt.title("NormalDE(RED),IRDE12(Blue),NormalFE(Green),IRFE12(Yellow)")
 ##plt.show()
 ##plt.savefig("NormalDE(RED),IRDE12(Blue),NormalFE(Green),IRFE12(Yellow)")
 
@@ -196,11 +139,6 @@ bFE12 = []
 bFE12 = list(mat['X124_FE_time'])
 #print(len(bFE12))
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE12[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE12[:100],'y')
-plt.title("NormalDE(RED),bDE12(Blue),NormalFE(Green),bFE12(Yellow)")
 ##plt.savefig("NormalDE(RED),bDE12(Blue),NormalFE(Green),bFE12(Yellow)")
 ##plt.show()
 
@@ -218,14 +156,6 @@ urDE12 = list(mat['X137_DE_time'])
 urFE12 = []
 urFE12 = list(mat['X137_FE_time'])
 #print(len(urFE12))
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE12[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE12[:100],'y')
-plt.title("NormalDE(RED),urDE12(Blue),NormalFE(Green),urFE12(Yellow)")
-##plt.savefig("NormalDE(RED),urDE12(Blue),NormalFE(Green),urFE12(Yellow)")
-##plt.show()
 
 
 ##########################  Grade1 LOAD 3  #####################
@@ -266,31 +196,6 @@ urFE13 = []
 urFE13 = list(mat['X138_FE_time'])
 #print(len(urFE13))
 
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE13[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE13[:100],'y')
-plt.title("NormalDE(RED),IRDE13(Blue),NormalFE(Green),IRFE13(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE13(Blue),NormalFE(Green),IRFE13(Yellow)")
-##plt.show()
-
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE13[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE13[:100],'y')
-plt.title("NormalDE(RED),bDE13(Blue),NormalFE(Green),bFE13(Yellow)")
-##plt.savefig("NormalDE(RED),bDE13(Blue),NormalFE(Green),bFE13(Yellow)")
-##plt.show()
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE13[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE13[:100],'y')
-plt.title("NormalDE(RED),urDE13(Blue),NormalFE(Green),urFE13(Yellow)")
-##plt.savefig("NormalDE(RED),urDE13(Blue),NormalFE(Green),urFE13(Yellow)")
-##plt.show()
 
 
 
@@ -334,32 +239,6 @@ urFE20 = list(mat['X201_FE_time'])
 #print(len(urFE20))
 
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE20[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE20[:100],'y')
-plt.title("NormalDE(RED),IRDE20(Blue),NormalFE(Green),IRFE20(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE20(Blue),NormalFE(Green),IRFE20(Yellow)")
-##plt.show()
-
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE20[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE20[:100],'y')
-plt.title("NormalDE(RED),bDE20(Blue),NormalFE(Green),bFE20(Yellow)")
-##plt.savefig("NormalDE(RED),bDE20(Blue),NormalFE(Green),bFE20(Yellow)")
-##plt.show()
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE20[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE20[:100],'y')
-plt.title("NormalDE(RED),urDE20(Blue),NormalFE(Green),urFE20(Yellow)")
-##plt.savefig("NormalDE(RED),urDE20(Blue),NormalFE(Green),urFE20(Yellow)")
-##plt.show()
-
-
 ##########################  Grade2 LOAD 1  #####################
  
 
@@ -397,34 +276,6 @@ urDE21 = list(mat['X202_DE_time'])
 urFE21 = []
 urFE21 = list(mat['X202_FE_time'])
 #print(len(urFE21))
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE21[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE21[:100],'y')
-plt.title("NormalDE(RED),IRDE21(Blue),NormalFE(Green),IRFE21(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE21(Blue),NormalFE(Green),IRFE21(Yellow)")
-##plt.show()
-
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE21[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE21[:100],'y')
-plt.title("NormalDE(RED),bDE21(Blue),NormalFE(Green),bFE21(Yellow)")
-##plt.savefig("NormalDE(RED),bDE21(Blue),NormalFE(Green),bFE21(Yellow)")
-##plt.show()
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE21[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE21[:100],'y')
-plt.title("NormalDE(RED),urDE21(Blue),NormalFE(Green),urFE21(Yellow)")
-##plt.savefig("NormalDE(RED),urDE21(Blue),NormalFE(Green),urFE21(Yellow)")
-##plt.show()
-
-
-
 
 
 ##########################  Grade2 LOAD 2  #####################
@@ -464,33 +315,6 @@ urDE22 = list(mat['X203_DE_time'])
 urFE22 = []
 urFE22 = list(mat['X203_FE_time'])
 #print(len(urFE22))
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE22[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE22[:100],'y')
-plt.title("NormalDE(RED),IRDE22(Blue),NormalFE(Green),IRFE22(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE22(Blue),NormalFE(Green),IRFE22(Yellow)")
-##plt.show()
-
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE22[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE22[:100],'y')
-plt.title("NormalDE(RED),bDE22(Blue),NormalFE(Green),bFE22(Yellow)")
-##plt.savefig("NormalDE(RED),bDE22(Blue),NormalFE(Green),bFE22(Yellow)")
-##plt.show()
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE22[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE22[:100],'y')
-plt.title("NormalDE(RED),urDE22(Blue),NormalFE(Green),urFE22(Yellow)")
-##plt.savefig("NormalDE(RED),urDE22(Blue),NormalFE(Green),urFE22(Yellow)")
-##plt.show()
-
-
 
 
 
@@ -533,35 +357,6 @@ urFE23 = list(mat['X204_FE_time'])
 #print(len(urFE23))
 
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE23[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE23[:100],'y')
-plt.title("NormalDE(RED),IRDE23(Blue),NormalFE(Green),IRFE23(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE23(Blue),NormalFE(Green),IRFE23(Yellow)")
-##plt.show()
-
-
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE23[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE23[:100],'y')
-plt.title("NormalDE(RED),bDE23(Blue),NormalFE(Green),bFE23(Yellow)")
-##plt.savefig("NormalDE(RED),bDE23(Blue),NormalFE(Green),bFE23(Yellow)")
-##plt.show()
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE23[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE23[:100],'y')
-plt.title("NormalDE(RED),urDE23(Blue),NormalFE(Green),urFE23(Yellow)")
-##plt.savefig("NormalDE(RED),urDE22(Blue),NormalFE(Green),urFE22(Yellow)")
-##plt.show()
-
-
-
-
 
 
 ##########################  Grade3 LOAD 0  #####################
@@ -601,33 +396,6 @@ urDE30 = list(mat['X238_DE_time'])
 urFE30 = []
 urFE30 = list(mat['X238_FE_time'])
 #print(len(urFE30))
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE30[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE30[:100],'y')
-plt.title("NormalDE(RED),IRDE30(Blue),NormalFE(Green),IRFE30(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE30(Blue),NormalFE(Green),IRFE30(Yellow)")
-##plt.show()
-
-
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE30[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE30[:100],'y')
-plt.title("NormalDE(RED),bDE30(Blue),NormalFE(Green),bFE30(Yellow)")
-##plt.savefig("NormalDE(RED),bDE30(Blue),NormalFE(Green),bFE30(Yellow)")
-##plt.show()
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE30[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE30[:100],'y')
-plt.title("NormalDE(RED),urDE30(Blue),NormalFE(Green),urFE30(Yellow)")
-##plt.savefig("NormalDE(RED),urDE30(Blue),NormalFE(Green),urFE30(Yellow)")
-##plt.show()
-
 
 
 ##########################  Grade3 LOAD 1  #####################
@@ -748,83 +516,51 @@ urFE33 = list(mat['X241_FE_time'])
 #print(len(urFE33))
 
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE31[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE31[:100],'y')
-plt.title("NormalDE(RED),IRDE31(Blue),NormalFE(Green),IRFE31(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE31(Blue),NormalFE(Green),IRFE31(Yellow)")
-##plt.show()
+#########################PLOTTING ALL DATA##########################################
+
+# plotMe(irDE10,irFE10)
+# plotMe(bDE10,bFE10)
+# plotMe(urDE10,urFE10)
+# plotMe(irDE11,irFE11)
+# plotMe(bDE11,bFE11)
+# plotMe(urDE11,urFE11)
+# plotMe(irDE12,irFE12)
+# plotMe(bDE12,bFE12)
+# plotMe(urDE12,urFE12)
+# plotMe(irDE13,irFE13)
+# plotMe(bDE13,bFE13)
+# plotMe(urDE13,urFE13)
+
+# plotMe(irDE20,irFE20)
+# plotMe(bDE20,bFE20)
+# plotMe(urDE20,urFE20)
+# plotMe(irDE21,irFE21)
+# plotMe(bDE21,bFE21)
+# plotMe(urDE21,urFE21)
+# plotMe(irDE22,irFE22)
+# plotMe(bDE22,bFE22)
+# plotMe(urDE22,urFE22)
+# plotMe(irDE23,irFE23)
+# plotMe(bDE23,bFE23)
+# plotMe(urDE23,urFE23)
+
+# plotMe(irDE30,irFE30)
+# plotMe(bDE30,bFE30)
+# plotMe(urDE30,urFE30)
+# plotMe(irDE31,irFE31)
+# plotMe(bDE31,bFE31)
+# plotMe(urDE31,urFE31)
+# plotMe(irDE32,irFE32)
+# plotMe(bDE32,bFE32)
+# plotMe(urDE32,urFE32)
+# plotMe(irDE33,irFE33)
+# plotMe(bDE33,bFE33)
+# plotMe(urDE33,urFE33)
 
 
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE31[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE31[:100],'y')
-plt.title("NormalDE(RED),bDE31(Blue),NormalFE(Green),bFE31(Yellow)")
-##plt.savefig("NormalDE(RED),bDE31(Blue),NormalFE(Green),bFE31(Yellow)")
-##plt.show()
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE31[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE31[:100],'y')
-plt.title("NormalDE(RED),urDE31(Blue),NormalFE(Green),urFE31(Yellow)")
-##plt.savefig("NormalDE(RED),urDE31(Blue),NormalFE(Green),urFE31(Yellow)")
-##plt.show()
 
 
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE32[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE32[:100],'y')
-plt.title("NormalDE(RED),IRDE32(Blue),NormalFE(Green),IRFE32(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE32(Blue),NormalFE(Green),IRFE32(Yellow)")
-##plt.show()
-
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE32[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE32[:100],'y')
-plt.title("NormalDE(RED),bDE32(Blue),NormalFE(Green),bFE32(Yellow)")
-##plt.savefig("NormalDE(RED),bDE32(Blue),NormalFE(Green),bFE32(Yellow)")
-##plt.show()
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE32[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE32[:100],'y')
-plt.title("NormalDE(RED),urDE32(Blue),NormalFE(Green),urFE32(Yellow)")
-##plt.savefig("NormalDE(RED),urDE32(Blue),NormalFE(Green),urFE32(Yellow)")
-##plt.show()
-
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,irDE33[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,irFE33[:100],'y')
-plt.title("NormalDE(RED),IRDE33(Blue),NormalFE(Green),IRFE33(Yellow)")
-##plt.savefig("NormalDE(RED),IRDE33(Blue),NormalFE(Green),IRFE33(Yellow)")
-##plt.show()
-
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,bDE33[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,bFE33[:100],'y')
-plt.title("NormalDE(RED),bDE33(Blue),NormalFE(Green),bFE33(Yellow)")
-##plt.savefig("NormalDE(RED),bDE33(Blue),NormalFE(Green),bFE33(Yellow)")
-##plt.show()
-
-plt.plot(t,nMainDE[:100],'r')
-plt.plot(t,urDE33[:100],'b')
-plt.plot(t,nMainFE[:100],'g')
-plt.plot(t,urFE33[:100],'y')
-plt.title("NormalDE(RED),urDE33(Blue),NormalFE(Green),urFE33(Yellow)")
-##plt.savefig("NormalDE(RED),urDE33(Blue),NormalFE(Green),urFE33(Yellow)")
-##plt.show()
 
 ''' FOR PLOTS 25 SUM  '''
 
@@ -1425,7 +1161,7 @@ plt.title("SumDENormal vs SumDeb33")
 # plt.savefig("SumDENormal vs SumDeb33")
 # plt.show()
 
-
+plt.close()
 
 
 
@@ -1435,377 +1171,497 @@ plt.title("SumDENormal vs SumDeb33")
 
 '''''''''''''''''''''END PLOTS'''''''''''''''''''''''''''''''''''''''
 
+def splitData(irDataDE, irDataFE, urDataDE, urDataFE, bDataDE, bDataFE):
+	xDE = []
+	for i in nMainDE:
+		xDE.append(i)
+	for i in irDataDE:
+		xDE.append(i)
+	for i in urDataDE:
+		xDE.append(i)
+	for i in bDataDE:
+		xDE.append(i)
+	xFE = []
+	for i in nMainFE:
+		xFE.append(i)
+	for i in irDataFE:
+		xFE.append(i)
+	for i in urDataFE:
+		xFE.append(i)
+	for i in bDataFE:
+		xFE.append(i)
 
-''''Training testing for single class'''
 
+
+	X = np.vstack((xDE,xFE))
+
+	Y =[]
+	for i in nMainDE:
+		Y.append(0)
+	for i in irDataDE:
+		Y.append(1)
+	for i in urDataDE:
+		Y.append(2)
+	for i in bDataDE:
+		Y.append(3)
+
+	return train_test_split(X.T, Y, test_size=0.33, random_state=42)
+
+
+finalList=[]
+testList =[]
+def Values(pRF,pKN, pDT,Ytest):
+	tp =0
+	tn =0
+	fp =0
+	fn =0
+
+	for i in range(len(Ytest)):
+		zeroCount =0
+		oneCount = 0
+		final = 0
+		if(round(pRF[i]) == 0):
+			zeroCount+=1
+		else:
+			oneCount+=1
+		if(round(pKN[i]) == 0):
+			zeroCount+=1
+		else:
+			oneCount+=1
+		if(round(pDT[i]) == 0):
+			zeroCount+=1
+		else:
+			oneCount+=1
+		if(zeroCount > oneCount):
+			final = 0
+			finalList.append(0)
+		else:
+			final = 1
+			finalList.append(1)
+
+		
+		if(final == 1 and Ytest == 0):
+			print("Test ---> ", Ytest[i], "RF --> ",pRF[i], "DT --> " , pDT[i], "KN --> ",pKN[i] )
+		
+
+		if(final == 1 and (Ytest[i] == 1 or Ytest[i] == 2 or Ytest[i] == 3)):
+			tn +=1
+		elif(final == 0 and Ytest[i] == 0):
+			tp += 1
+		elif(final == 0 and (Ytest[i] == 1 or Ytest[i] == 2 or Ytest[i] == 3)):
+			fp +=1
+		elif(final == 1 and Ytest==0):
+			fn +=1
+
+		if(Ytest[i] == 1 or Ytest[i] == 2 or Ytest[i] == 3):
+			testList.append(1)
+		else:
+			testList.append(0)
+
+
+	return tp, tn, fp,fn
+
+
+def drawGraphs(predicted, given):
+
+	fpr, tpr, threshold = metrics.roc_curve(given,predicted)
+	roc_auc = metrics.auc(fpr, tpr)
+	plt.title('Receiver Operating Characteristic')
+	plt.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % roc_auc)
+	plt.legend(loc = 'lower right')
+	plt.plot([0, 1], [0, 1],'r--')
+	plt.xlim([-0.05, 1.1])
+	plt.ylim([-0.05, 1.1])
+	plt.ylabel('True Positive Rate')
+	plt.xlabel('False Positive Rate')
+	plt.show()
+
+
+
+
+print(''''Training testing for single class''')
 
 
 
 nMainDETrain = nMainDE[ :(len(nMainDE)//3) ]
-nMainDETest = nMainDE[ (len(nMainDE)//3)+1 : ]
+nMainDETest = nMainDE
 nMainFETrain = nMainFE[ : len(nMainFE)//3 ]
-nMainFETest = nMainFE[ (len(nMainFE)//3)+1 : ]
-
-
-irFE10Train = irFE10[ : (len(irFE10)//3)]
-irFE10Test = irFE10[  (len(irFE10)//3)+1 :  ]
-
-irDE10Train = irDE10[ : (len(irDE10)//3)]
-irDE10Test = irDE10[  (len(irDE10)//3)+1 :  ]
-
-bFE10Train = bFE10[ : (len(bFE10)//3)]
-bFE10Test = bFE10[  (len(bFE10)//3)+1 :  ]
-
-bDE10Train = bDE10[ : (len(bDE10)//3)]
-bDE10Test = bDE10[  (len(bDE10)//3)+1 :  ]
-
-##################### Train  IR DE ################################
-
-Xtrain = []
-for j in nMainDETrain:
-    Xtrain.append(j)
-for j in irDE10Train:
-    Xtrain.append(j)
-##Xtrain.append(irDE10Train)
-#print(np.shape(nMainDETrain))
-#print(np.shape(irDE10Train))
-#print(len(Xtrain))
-Xtrain = np.asarray(Xtrain).reshape(-1,1)
-
-Ytrain = []
-for i in nMainDETrain:
-    Ytrain.append(0)
-for i in irDE10Train:
-    Ytrain.append(1)
-#print(len(Ytrain))
-##Ytrain = np.asarray(Ytrain).reshape(-1,1)
-
-Xtest = []
-for j in nMainDETest:
-    Xtest.append(j)
-for j in irDE10Test:
-    Xtest.append(j)
-Xtest = np.asarray(Xtest).reshape(-1,1)
-
-
-Ytest =[]
-for i in nMainDETest:
-    Ytest.append(0)
-for i in irDE10Test:
-    Ytest.append(1)
-
-# #print('''DE PREDICTION ONLY''')
-# rf = RandomForestRegressor()
-# rf.fit(Xtrain,Ytrain)
-# predictions = rf.predict(Xtest)
-# errors = abs(predictions - Ytest)
-# #print('Mean Absolute Error:', round(np.mean(errors), 2))
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# #print("RandomForest DE only ", accuracy)
-
-# LR = LinearRegression().fit(Xtrain,Ytrain)
-# predictions=LR.predict(Xtest)
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# #print("LinearRegression DE only ", accuracy)
-
-##################### Train  IR FE ################################
-
-Xtrain = []
-for j in nMainFETrain:
-    Xtrain.append(j)
-for j in irFE10Train:
-    Xtrain.append(j)
-##Xtrain.append(irDE10Train)
-#print(np.shape(nMainFETrain))
-#print(np.shape(irFE10Train))
-#print(len(Xtrain))
-Xtrain = np.asarray(Xtrain).reshape(-1,1)
-
-Ytrain = []
-for i in nMainFETrain:
-    Ytrain.append(0)
-for i in irFE10Train:
-    Ytrain.append(1)
-#print(len(Ytrain))
-##Ytrain = np.asarray(Ytrain).reshape(-1,1)
-
-Xtest = []
-for j in nMainFETest:
-    Xtest.append(j)
-for j in irFE10Test:
-    Xtest.append(j)
-Xtest = np.asarray(Xtest).reshape(-1,1)
-
-
-Ytest =[]
-for i in nMainFETest:
-    Ytest.append(0)
-for i in irFE10Test:
-    Ytest.append(1)
-
-# #print('''FE PREDICTION ONLY''')
-
-# rf = RandomForestRegressor()
-# rf.fit(Xtrain,Ytrain)
-# predictions = rf.predict(Xtest)
-# errors = abs(predictions - Ytest)
-# #print('Mean Absolute Error:', round(np.mean(errors), 2))
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# #print("RandomForest FE only ", accuracy)
-
-# LR = LinearRegression().fit(Xtrain,Ytrain)
-# predictions=LR.predict(Xtest)
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# #print("LinearRegression FE only ", accuracy)
-
-
-
-'''Train TEst B DE '''
-
-Xtrain = []
-for j in nMainDETrain:
-    Xtrain.append(j)
-for j in bDE10Train:
-    Xtrain.append(j)
-##Xtrain.append(irDE10Train)
-#print(np.shape(nMainDETrain))
-#print(np.shape(bDE10Train))
-#print(len(Xtrain))
-Xtrain = np.asarray(Xtrain).reshape(-1,1)
-
-Ytrain = []
-for i in nMainDETrain:
-    Ytrain.append(0)
-for i in bDE10Train:
-    Ytrain.append(1)
-#print(len(Ytrain))
-##Ytrain = np.asarray(Ytrain).reshape(-1,1)
-
-Xtest = []
-for j in nMainDETest:
-    Xtest.append(j)
-for j in bDE10Test:
-    Xtest.append(j)
-Xtest = np.asarray(Xtest).reshape(-1,1)
-
-
-Ytest =[]
-for i in nMainDETest:
-    Ytest.append(0)
-for i in bDE10Test:
-    Ytest.append(1)
-
-# #print('''DE PREDICTION ONLY Ball ''')
-# rf = RandomForestRegressor()
-# rf.fit(Xtrain,Ytrain)
-# predictions = rf.predict(Xtest)
-# errors = abs(predictions - Ytest)
-# #print('Mean Absolute Error:', round(np.mean(errors), 2))
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# #print("RandomForest B DE only ", accuracy)
-
-# LR = LinearRegression().fit(Xtrain,Ytrain)
-# predictions=LR.predict(Xtest)
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# #print("LinearRegression  B DE only ", accuracy)
-
-
-
-
-'''DE FE MERGE '''
-
-
-##################### Train  IR DE ################################
-
-XtrainDE = []
-for j in nMainDETrain:
-    XtrainDE.append(j)
-for j in irDE10Train:
-    XtrainDE.append(j)
-
-YtrainDE = []
-for i in nMainDETrain:
-    YtrainDE.append(0)
-for i in irDE10Train:
-    YtrainDE.append(1)
-#print(len(Ytrain))
-##Ytrain = np.asarray(Ytrain).reshape(-1,1)
-
-XtestDE = []
-for j in nMainDETest:
-    XtestDE.append(j)
-for j in irDE10Test:
-    XtestDE.append(j)
-
-
-YtestDE =[]
-for i in nMainDETest:
-    YtestDE.append(0)
-for i in irDE10Test:
-    YtestDE.append(1)
-
-XtrainFE = []
-for j in nMainFETrain:
-    XtrainFE.append(j)
-for j in irFE10Train:
-    XtrainFE.append(j)
-
-YtrainFE = []
-for i in nMainFETrain:
-    YtrainFE.append(0)
-for i in irFE10Train:
-    YtrainFE.append(1)
-##Ytrain = np.asarray(Ytrain).reshape(-1,1)
-
-XtestFE = []
-for j in nMainFETest:
-    XtestFE.append(j)
-for j in irFE10Test:
-    XtestFE.append(j)
-
-
-YtestFE =[]
-for i in nMainFETest:
-    YtestFE.append(0)
-for i in irFE10Test:
-    YtestFE.append(1)
-
-Xtest = np.vstack((XtestDE,XtestFE))
-Xtrain = np.vstack((XtrainDE,XtrainFE))
-#print(np.shape(Xtest),np.shape(Xtrain))
-
-
-Ytest =[]
-for i in nMainFETest:
-    Ytest.append(0)
-for i in irFE10Test:
-    Ytest.append(1)
-
-Ytrain = []
-for i in nMainFETrain:
-	Ytrain.append(0)
-for i in irFE10Train:
-	Ytrain.append(1)
-#print(np.shape(Ytrain))
-
-
-
-print('''DE FE PREDICTION ONLY''')
-
-# rf = RandomForestRegressor()
-# rf.fit(Xtrain.T,Ytrain)
-# predictions = rf.predict(Xtest.T)
-# errors = abs(predictions - Ytest)
-# print('Mean Absolute Error:', round(np.mean(errors), 2))
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# print("RandomForest DE FE  ", accuracy)
-
-# LR = LinearRegression().fit(Xtrain.T,Ytrain)
-# predictions=LR.predict(Xtest.T)
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# print("LinearRegression DE FE ", accuracy)
-# plt.close()
-# plt.figure()
-# tx=Xtrain.T
-# plt.scatter(tx[:1000,0],tx[:1000,1],c=Ytrain[:1000])
-# plt.show()
-
-
-'''DE FE MERGE '''
-
-
-##################### Train  IR DE ################################
-
-XtrainDE = []
-for j in nMainDETrain:
-    XtrainDE.append(j)
-for j in bDE10Train:
-    XtrainDE.append(j)
-
-YtrainDE = []
-for i in nMainDETrain:
-    YtrainDE.append(0)
-for i in bDE10Train:
-    YtrainDE.append(1)
-#print(len(Ytrain))
-##Ytrain = np.asarray(Ytrain).reshape(-1,1)
-
-XtestDE = []
-for j in nMainDETest:
-    XtestDE.append(j)
-for j in bDE10Test:
-    XtestDE.append(j)
-
-
-YtestDE =[]
-for i in nMainDETest:
-    YtestDE.append(0)
-for i in bDE10Test:
-    YtestDE.append(1)
-
-XtrainFE = []
-for j in nMainFETrain:
-    XtrainFE.append(j)
-for j in bFE10Train:
-    XtrainFE.append(j)
-
-YtrainFE = []
-for i in nMainFETrain:
-    YtrainFE.append(0)
-for i in bFE10Train:
-    YtrainFE.append(1)
-##Ytrain = np.asarray(Ytrain).reshape(-1,1)
-
-XtestFE = []
-for j in nMainFETest:
-    XtestFE.append(j)
-for j in bFE10Test:
-    XtestFE.append(j)
-
-
-YtestFE =[]
-for i in nMainFETest:
-    YtestFE.append(0)
-for i in bFE10Test:
-    YtestFE.append(1)
-
-Xtest = np.vstack((XtestDE,XtestFE))
-Xtrain = np.vstack((XtrainDE,XtrainFE))
-#print(np.shape(Xtest),np.shape(Xtrain))
-
-
-Ytest =[]
-for i in nMainFETest:
-    Ytest.append(0)
-for i in bFE10Test:
-    Ytest.append(1)
-
-Ytrain = []
-for i in nMainFETrain:
-	Ytrain.append(0)
-for i in bFE10Train:
-	Ytrain.append(1)
-#print(np.shape(Ytrain))
-
-
-
-#print('''DE FE PREDICTION ONLY''')
-
-# rf = RandomForestRegressor()
-# rf.fit(Xtrain.T,Ytrain)
-# predictions = rf.predict(Xtest.T)
-# errors = abs(predictions - Ytest)
-# #print('Mean Absolute Error:', round(np.mean(errors), 2))
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# print("RandomForest DE FE  ", accuracy)
-
-# LR = LinearRegression().fit(Xtrain.T,Ytrain)
-# predictions=LR.predict(Xtest.T)
-# accuracy = accuracy_score(predictions.round(),Ytest)
-# print("LinearRegression DE FE ", accuracy)
-
-clf = svm.SVC(gamma='scale')
-clf.fit(Xtrain.T,Ytrain)
-predictions = clf.predict(Xtest.T)
-accuracy = accuracy_score(predictions.round(),Ytest)
-print("SVM DE FE B", accuracy)
+nMainFETest = nMainFE
+
+
+def trainTest(DE,FE):
+	trainListD = DE[ : (len(irFE10)//3)]
+	testListD = DE
+	trainListF = FE[ : (len(irFE10)//3)]
+	testListF = FE
+	return trainListD,testListD,trainListF,testListF
+
+def XYreturn(DEtrain,DEtest,FEtrain,FEtest):
+	XtrainDE = []
+	for j in nMainDETrain:
+	    XtrainDE.append(j)
+	for j in DEtrain:
+	    XtrainDE.append(j)
+
+	YtrainDE = []
+	for i in nMainDETrain:
+	    YtrainDE.append(0)
+	for i in DEtrain:
+	    YtrainDE.append(1)
+	#print(len(Ytrain))
+	##Ytrain = np.asarray(Ytrain).reshape(-1,1)
+
+	XtestDE = []
+	for j in nMainDETest:
+	    XtestDE.append(j)
+	for j in DEtest:
+	    XtestDE.append(j)
+
+
+	YtestDE =[]
+	for i in nMainDETest:
+	    YtestDE.append(0)
+	for i in DEtest:
+	    YtestDE.append(1)
+
+	XtrainFE = []
+	for j in nMainFETrain:
+	    XtrainFE.append(j)
+	for j in FEtrain:
+	    XtrainFE.append(j)
+
+	YtrainFE = []
+	for i in nMainFETrain:
+	    YtrainFE.append(0)
+	for i in FEtrain:
+	    YtrainFE.append(1)
+	##Ytrain = np.asarray(Ytrain).reshape(-1,1)
+
+	XtestFE = []
+	for j in nMainFETest:
+	    XtestFE.append(j)
+	for j in FEtest:
+	    XtestFE.append(j)
+
+
+	YtestFE =[]
+	for i in nMainFETest:
+	    YtestFE.append(0)
+	for i in FEtest:
+	    YtestFE.append(1)
+
+	Xtest = np.vstack((XtestDE,XtestFE))
+	Xtrain = np.vstack((XtrainDE,XtrainFE))
+	#print(np.shape(Xtest),np.shape(Xtrain))
+
+
+	Ytest =[]
+	for i in nMainFETest:
+	    Ytest.append(0)
+	for i in FEtest:
+	    Ytest.append(1)
+
+	Ytrain = []
+	for i in nMainFETrain:
+		Ytrain.append(0)
+	for i in FEtrain:
+		Ytrain.append(1)
+
+	return Xtest,Xtrain,Ytest,Ytrain
+
+def predictRF(Xtest,Xtrain,Ytest,Ytrain):
+
+	rf = RandomForestRegressor()
+	rf.fit(Xtrain.T,Ytrain)
+	predictions = rf.predict(Xtest.T)
+	accuracy = accuracy_score(predictions.round(),Ytest)
+	print("RandomForest DE FE  ", accuracy)
+	return predictions
+
+def predictLR(Xtest,Xtrain,Ytest,Ytrain):
+
+	LR = LinearRegression().fit(Xtrain.T,Ytrain)
+	predictions=LR.predict(Xtest.T)
+	accuracy = accuracy_score(predictions.round(),Ytest)
+	print("LinearRegression DE FE ", accuracy)
+	plt.close()
+	plt.figure()
+	tx=Xtrain.T
+	plt.scatter(tx[:1000,0],tx[:1000,1],c=Ytrain[:1000])
+	plt.show()
+	return predictions
+
+def predictKNN(Xtest,Xtrain,Ytest,Ytrain):
+	
+	neigh = KNeighborsClassifier()
+	neigh.fit(Xtrain.T,Ytrain)
+	predictions=neigh.predict(Xtest.T)
+	accuracy = accuracy_score(predictions.round(),Ytest)
+	print("KNN DE FE ", accuracy)
+	return predictions
+
+
+def predictSVM(Xtest,Xtrain,Ytest,Ytrain):
+
+	clf = svm.SVC(gamma='scale')
+	clf.fit(Xtrain.T,Ytrain)
+	predictions = clf.predict(Xtest.T)
+	accuracy = accuracy_score(predictions.round(),Ytest)
+	print("SVM DE FE B", accuracy)	
+	return predictions
+
+def predictDTree(Xtest,Xtrain,Ytest,Ytrain):
+
+	dt = DecisionTreeClassifier(random_state=0).fit(Xtrain,Ytrain)
+	predictions = dt.predict(Xtest)
+	accuracy = accuracy_score(predictions.round(),Ytest)
+	print("Decision Tree DE FE ", accuracy)
+	return predictions
+
+
+def plotMat(matrix):
+
+	plt.matshow(matrix)
+	plt.title('Confusion Matrix')
+	plt.text(0 , 0 , matrix[0][0] , va= 'center', ha = 'center')
+	plt.text(0 , 1 , matrix[0][1] , va= 'center', ha = 'center')
+	plt.text(1 , 0 , matrix[1][0] , va= 'center', ha = 'center')
+	plt.text(1 , 1 , matrix[1][1] , va= 'center', ha = 'center')
+	plt.colorbar()
+	plt.show()
+	plt.clf()
+	plt.close()
+
+
+
+
+print("MultiClass Testing")
+
+print("Grade 1 label 0")
+
+Xtrain, Xtest, Ytrain, Ytest = splitData(irDE10, irFE10 , urDE10 , urFE10, bDE10, bFE10)
+pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
+pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
+pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
+tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
+
+print(tp,tn,fp,fn)
+
+Accuracy = (tp+tn)/(tp+fp+fn+tn)
+print("Final Accuracy ", Accuracy)
+
+Precision = tp/(tp+fp)
+print("Final precision ", Precision)
+
+Recall = tp/(tp+fn)
+print("Final recall", Recall)
+plt.clf()
+plt.close()
+drawGraphs(finalList,testList)
+plt.close()
+
+print("Grade 2 label 1")
+
+Xtrain, Xtest, Ytrain, Ytest = splitData(irDE21, irFE21 , urDE21 , urFE21, bDE21, bFE21)
+pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
+pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
+pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
+tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
+
+print(tp,tn,fp,fn)
+
+Accuracy = (tp+tn)/(tp+fp+fn+tn)
+print("Final Accuracy ", Accuracy)
+
+Precision = tp/(tp+fp)
+print("Final precision ", Precision)
+
+Recall = tp/(tp+fn)
+print("Final recall", Recall)
+plt.clf()
+plt.close()
+drawGraphs(finalList,testList)
+plt.close()
+accuracy = accuracy_score(finalList,testList)
+print("check ", accuracy)
+
+	
+print('''-------------------------------------------- GLOBAL1------------------------------------------------''')
+
+# ##################### Train  IR DE FE ################################
+
+
+irDE10Train,irDE10Test,irFE10Train,irFE10Test = trainTest(irDE10,irFE10)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE10Train,irDE10Test,irFE10Train,irFE10Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+
+irDE11Train,irDE11Test,irFE11Train,irFE11Test = trainTest(irDE11,irFE11)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE11Train,irDE11Test,irFE11Train,irFE11Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+irDE12Train,irDE12Test,irFE12Train,irFE12Test = trainTest(irDE12,irFE12)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE12Train,irDE12Test,irFE12Train,irFE12Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+irDE13Train,irDE13Test,irFE13Train,irFE13Test = trainTest(irDE13,irFE13)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE13Train,irDE13Test,irFE13Train,irFE13Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+# ##################### Train  UR DE FE ################################
+
+
+urDE10Train,urDE10Test,urFE10Train,urFE10Test = trainTest(urDE10,urFE10)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(urDE10Train,urDE10Test,urFE10Train,urFE10Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+
+urDE11Train,urDE11Test,urFE11Train,urFE11Test = trainTest(urDE11,urFE11)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(urDE11Train,urDE11Test,urFE11Train,urFE11Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+urDE12Train,urDE12Test,urFE12Train,urFE12Test = trainTest(urDE12,urFE12)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(urDE12Train,urDE12Test,urFE12Train,urFE12Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+urDE13Train,urDE13Test,urFE13Train,urFE13Test = trainTest(urDE13,urFE13)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE13Train,irDE13Test,irFE13Train,irFE13Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+print('''-------------------------------------------- GLOBAL2------------------------------------------------''')
+
+# ##################### Train  IR DE FE ################################
+
+
+irDE20Train,irDE20Test,irFE20Train,irFE20Test = trainTest(irDE20,irFE20)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE20Train,irDE20Test,irFE20Train,irFE20Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+
+irDE21Train,irDE21Test,irFE21Train,irFE21Test = trainTest(irDE21,irFE21)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE21Train,irDE21Test,irFE21Train,irFE21Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+irDE22Train,irDE22Test,irFE22Train,irFE22Test = trainTest(irDE22,irFE22)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE22Train,irDE22Test,irFE22Train,irFE22Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+irDE23Train,irDE23Test,irFE23Train,irFE23Test = trainTest(irDE23,irFE23)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE23Train,irDE23Test,irFE23Train,irFE23Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+# ##################### Train  UR DE FE ################################
+
+
+urDE20Train,urDE20Test,urFE20Train,urFE20Test = trainTest(urDE20,urFE20)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(urDE20Train,urDE20Test,urFE20Train,urFE20Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+
+urDE21Train,urDE21Test,urFE21Train,urFE21Test = trainTest(urDE21,urFE21)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(urDE21Train,urDE21Test,urFE21Train,urFE21Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+urDE22Train,urDE22Test,urFE22Train,urFE22Test = trainTest(urDE22,urFE22)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(urDE22Train,urDE22Test,urFE22Train,urFE22Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+urDE23Train,urDE23Test,urFE23Train,urFE23Test = trainTest(urDE23,urFE23)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE23Train,irDE23Test,irFE23Train,irFE23Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+plotMat(matrix)
+drawGraphs(predictions,Ytest)
+
+
+
