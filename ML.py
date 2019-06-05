@@ -1435,55 +1435,55 @@ def plotMat(matrix):
 
 
 
-# print("MultiClass Testing")
+print("MultiClass Testing")
 
-# print("Grade 1 label 0")
+print("Grade 1 label 0")
 
-# Xtrain, Xtest, Ytrain, Ytest = splitData(irDE10, irFE10 , urDE10 , urFE10, bDE10, bFE10)
-# pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
-# pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
-# pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
-# tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
+Xtrain, Xtest, Ytrain, Ytest = splitData(irDE10, irFE10 , urDE10 , urFE10, bDE10, bFE10)
+pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
+pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
+pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
+tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
 
-# print(tp,tn,fp,fn)
+print(tp,tn,fp,fn)
 
-# Accuracy = (tp+tn)/(tp+fp+fn+tn)
-# print("Final Accuracy ", Accuracy)
+Accuracy = (tp+tn)/(tp+fp+fn+tn)
+print("Final Accuracy ", Accuracy)
 
-# Precision = tp/(tp+fp)
-# print("Final precision ", Precision)
+Precision = tp/(tp+fp)
+print("Final precision ", Precision)
 
-# Recall = tp/(tp+fn)
-# print("Final recall", Recall)
-# plt.clf()
-# plt.close()
-# drawGraphs(finalList,testList)
-# plt.close()
+Recall = tp/(tp+fn)
+print("Final recall", Recall)
+plt.clf()
+plt.close()
+drawGraphs(finalList,testList)
+plt.close()
 
-# print("Grade 2 label 1")
+print("Grade 2 label 1")
 
-# Xtrain, Xtest, Ytrain, Ytest = splitData(irDE21, irFE21 , urDE21 , urFE21, bDE21, bFE21)
-# pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
-# pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
-# pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
-# tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
+Xtrain, Xtest, Ytrain, Ytest = splitData(irDE21, irFE21 , urDE21 , urFE21, bDE21, bFE21)
+pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
+pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
+pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
+tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
 
-# print(tp,tn,fp,fn)
+print(tp,tn,fp,fn)
 
-# Accuracy = (tp+tn)/(tp+fp+fn+tn)
-# print("Final Accuracy ", Accuracy)
+Accuracy = (tp+tn)/(tp+fp+fn+tn)
+print("Final Accuracy ", Accuracy)
 
-# Precision = tp/(tp+fp)
-# print("Final precision ", Precision)
+Precision = tp/(tp+fp)
+print("Final precision ", Precision)
 
-# Recall = tp/(tp+fn)
-# print("Final recall", Recall)
-# plt.clf()
-# plt.close()
-# drawGraphs(finalList,testList)
-# plt.close()
-# accuracy = accuracy_score(finalList,testList)
-# print("check ", accuracy)
+Recall = tp/(tp+fn)
+print("Final recall", Recall)
+plt.clf()
+plt.close()
+drawGraphs(finalList,testList)
+plt.close()
+accuracy = accuracy_score(finalList,testList)
+print("check ", accuracy)
 
 	
 print('''-------------------------------------------- GLOBAL1------------------------------------------------''')
@@ -1836,6 +1836,190 @@ plt.xlabel('False Positive Rate')
 
 urDE23Train,urDE23Test,urFE23Train,urFE23Test = trainTest(urDE23,urFE23)
 Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE23Train,irDE23Test,irFE23Train,irFE23Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'y', label = 'Grade 3 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
+plt.show()
+
+plt.clf()
+plt.close()
+
+
+
+
+print('''-------------------------------------------- GLOBAL3------------------------------------------------''')
+
+# ##################### Train  IR DE FE ################################
+
+
+irDE30Train,irDE30Test,irFE30Train,irFE30Test = trainTest(irDE30,irFE30)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE30Train,irDE30Test,irFE30Train,irFE30Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.title('ROC AirQuality GLOBAL 1')
+plt.plot(fpr, tpr, 'm', label = 'Grade 0 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
+
+
+
+irDE31Train,irDE31Test,irFE31Train,irFE31Test = trainTest(irDE31,irFE31)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE31Train,irDE31Test,irFE31Train,irFE31Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'r', label = 'Grade 1 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
+
+
+irDE32Train,irDE32Test,irFE32Train,irFE32Test = trainTest(irDE32,irFE32)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE32Train,irDE32Test,irFE32Train,irFE32Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'g', label = 'Grade 2 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
+
+
+irDE33Train,irDE33Test,irFE33Train,irFE33Test = trainTest(irDE33,irFE33)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE33Train,irDE33Test,irFE33Train,irFE33Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'y', label = 'Grade 3 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+plt.show()
+
+plt.clf()
+plt.close()
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
+
+# ##################### Train  UR DE FE ################################
+
+
+urDE30Train,urDE30Test,urFE30Train,urFE30Test = trainTest(urDE30,urFE30)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(urDE30Train,urDE30Test,urFE30Train,urFE30Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.title('ROC AirQuality GLOBAL 2')
+plt.plot(fpr, tpr, 'm', label = 'Grade 0 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
+
+
+
+urDE31Train,urDE31Test,urFE31Train,urFE31Test = trainTest(urDE31,urFE31)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(urDE31Train,urDE31Test,urFE31Train,urFE31Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'r', label = 'Grade 1 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
+
+
+urDE32Train,urDE32Test,urFE32Train,urFE32Test = trainTest(urDE32,urFE32)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(urDE32Train,urDE32Test,urFE32Train,urFE32Test)
+print('''DE FE PREDICTION FOR IR ONLY''')
+predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
+
+matrix = metrics.confusion_matrix(Ytest,predictions.round())
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'g', label = 'Grade 2 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
+
+
+urDE33Train,urDE33Test,urFE33Train,urFE33Test = trainTest(urDE33,urFE33)
+Xtest,Xtrain,Ytest,Ytrain = XYreturn(irDE33Train,irDE33Test,irFE33Train,irFE33Test)
 print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
