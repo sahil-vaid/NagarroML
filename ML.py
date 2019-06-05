@@ -1435,55 +1435,55 @@ def plotMat(matrix):
 
 
 
-print("MultiClass Testing")
+# print("MultiClass Testing")
 
-print("Grade 1 label 0")
+# print("Grade 1 label 0")
 
-Xtrain, Xtest, Ytrain, Ytest = splitData(irDE10, irFE10 , urDE10 , urFE10, bDE10, bFE10)
-pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
-pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
-pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
-tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
+# Xtrain, Xtest, Ytrain, Ytest = splitData(irDE10, irFE10 , urDE10 , urFE10, bDE10, bFE10)
+# pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
+# pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
+# pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
+# tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
 
-print(tp,tn,fp,fn)
+# print(tp,tn,fp,fn)
 
-Accuracy = (tp+tn)/(tp+fp+fn+tn)
-print("Final Accuracy ", Accuracy)
+# Accuracy = (tp+tn)/(tp+fp+fn+tn)
+# print("Final Accuracy ", Accuracy)
 
-Precision = tp/(tp+fp)
-print("Final precision ", Precision)
+# Precision = tp/(tp+fp)
+# print("Final precision ", Precision)
 
-Recall = tp/(tp+fn)
-print("Final recall", Recall)
-plt.clf()
-plt.close()
-drawGraphs(finalList,testList)
-plt.close()
+# Recall = tp/(tp+fn)
+# print("Final recall", Recall)
+# plt.clf()
+# plt.close()
+# drawGraphs(finalList,testList)
+# plt.close()
 
-print("Grade 2 label 1")
+# print("Grade 2 label 1")
 
-Xtrain, Xtest, Ytrain, Ytest = splitData(irDE21, irFE21 , urDE21 , urFE21, bDE21, bFE21)
-pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
-pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
-pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
-tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
+# Xtrain, Xtest, Ytrain, Ytest = splitData(irDE21, irFE21 , urDE21 , urFE21, bDE21, bFE21)
+# pRF = predictRF(Xtest.T,Xtrain.T,Ytest,Ytrain)
+# pKN = predictKNN(Xtest.T,Xtrain.T,Ytest,Ytrain)
+# pDT = predictDTree(Xtest,Xtrain,Ytest,Ytrain)
+# tp, tn, fp,fn = Values(pRF,pKN, pDT,Ytest)
 
-print(tp,tn,fp,fn)
+# print(tp,tn,fp,fn)
 
-Accuracy = (tp+tn)/(tp+fp+fn+tn)
-print("Final Accuracy ", Accuracy)
+# Accuracy = (tp+tn)/(tp+fp+fn+tn)
+# print("Final Accuracy ", Accuracy)
 
-Precision = tp/(tp+fp)
-print("Final precision ", Precision)
+# Precision = tp/(tp+fp)
+# print("Final precision ", Precision)
 
-Recall = tp/(tp+fn)
-print("Final recall", Recall)
-plt.clf()
-plt.close()
-drawGraphs(finalList,testList)
-plt.close()
-accuracy = accuracy_score(finalList,testList)
-print("check ", accuracy)
+# Recall = tp/(tp+fn)
+# print("Final recall", Recall)
+# plt.clf()
+# plt.close()
+# drawGraphs(finalList,testList)
+# plt.close()
+# accuracy = accuracy_score(finalList,testList)
+# print("check ", accuracy)
 
 	
 print('''-------------------------------------------- GLOBAL1------------------------------------------------''')
@@ -1497,8 +1497,21 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.title('ROC Motor GLOBAL 1')
+plt.plot(fpr, tpr, 'm', label = 'Grade 0 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 
@@ -1508,8 +1521,18 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'r', label = 'Grade 1 Data ')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 irDE12Train,irDE12Test,irFE12Train,irFE12Test = trainTest(irDE12,irFE12)
@@ -1518,8 +1541,19 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'g', label = 'Grade 2 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 irDE13Train,irDE13Test,irFE13Train,irFE13Test = trainTest(irDE13,irFE13)
@@ -1528,8 +1562,23 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'y', label = 'Grade 3 Data ')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+plt.show()
+
+plt.clf()
+plt.close()
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 # ##################### Train  UR DE FE ################################
 
@@ -1540,8 +1589,20 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.title('ROC FAN GLOBAL 1')
+plt.plot(fpr, tpr, 'm', label = 'Grade 0 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 
@@ -1551,8 +1612,21 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'r', label = 'Grade 1 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 urDE12Train,urDE12Test,urFE12Train,urFE12Test = trainTest(urDE12,urFE12)
@@ -1561,8 +1635,19 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'g', label = 'Grade 2 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 urDE13Train,urDE13Test,urFE13Train,urFE13Test = trainTest(urDE13,urFE13)
@@ -1571,8 +1656,24 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'y', label = 'Grade 3 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+plt.show()
+
+plt.clf()
+plt.close()
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 print('''-------------------------------------------- GLOBAL2------------------------------------------------''')
@@ -1586,8 +1687,20 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.title('ROC Motor GLOBAL 2')
+plt.plot(fpr, tpr, 'm', label = 'Grade 0 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 
@@ -1597,8 +1710,19 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'r', label = 'Grade 1 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 irDE22Train,irDE22Test,irFE22Train,irFE22Test = trainTest(irDE22,irFE22)
@@ -1607,8 +1731,19 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'g', label = 'Grade 2 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 irDE23Train,irDE23Test,irFE23Train,irFE23Test = trainTest(irDE23,irFE23)
@@ -1617,8 +1752,22 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'y', label = 'Grade 3 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+plt.show()
+
+plt.clf()
+plt.close()
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 # ##################### Train  UR DE FE ################################
 
@@ -1629,8 +1778,19 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.title('ROC FAN GLOBAL 2')
+plt.plot(fpr, tpr, 'm', label = 'Grade 0 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 
@@ -1640,8 +1800,18 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'r', label = 'Grade 1 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 urDE22Train,urDE22Test,urFE22Train,urFE22Test = trainTest(urDE22,urFE22)
@@ -1650,8 +1820,18 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'g', label = 'Grade 2 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
 
 
 urDE23Train,urDE23Test,urFE23Train,urFE23Test = trainTest(urDE23,urFE23)
@@ -1660,8 +1840,21 @@ print('''DE FE PREDICTION FOR IR ONLY''')
 predictions = predictRF(Xtest,Xtrain,Ytest,Ytrain)
 
 matrix = metrics.confusion_matrix(Ytest,predictions.round())
-plotMat(matrix)
-drawGraphs(predictions,Ytest)
+fpr, tpr, threshold = metrics.roc_curve(Ytest,predictions.round())
+roc_auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, 'y', label = 'Grade 3 Data')
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'k--')
+plt.xlim([-0.05, 1.1])
+plt.ylim([-0.05, 1.1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
 
+# plotMat(matrix)
+# drawGraphs(predictions,Ytest)
+plt.show()
+
+plt.clf()
+plt.close()
 
 
